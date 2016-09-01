@@ -157,8 +157,8 @@ var mainState = {
 
 		//initialize an enemy
 		enemy.anchor.setTo(0.5, 1);
-		//add enemy from 
-		enemy.reset(game.width/2, game.height);
+		//add enemy from bottom
+		enemy.reset(game.width/2,0);
 		//add gravity 
 		enemy.body.gravity.y = -500;
 		enemy.body.velocity.x = 100 * game.rnd.pick([-1, 1]);
