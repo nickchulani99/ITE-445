@@ -22,6 +22,7 @@ var mainState = {
 		//player control
 		this.cursor = game.input.keyboard.createCursorKeys();
 
+
 		//walls
 		this.walls = game.add.group();
 		this.walls.enableBody = true;
@@ -58,8 +59,13 @@ var mainState = {
 		//create 10 enemies
 		this.enemies.createMultiple(10, 'enemy');
 		//call add enemy every 2.2 second
-		this.time.events.loop(2200, this.addEnemyFromTop, this);
-		this.time.events.loop(2200, this.addEnemyFromBottom, this);
+		game.time.events.loop(2200, this.addEnemy, this);
+	
+
+		this.enemies2 = game.add.group();//create enemy group with arcade physics
+		this.enemies2.enableBody = true;
+		this.enemies2.createMultiple(10, 'enemy');//create 10 enemies - they are dead by default
+		game.time.events.loop(2200, this.addEnemy2, this);
 	},
 
 	update: function(){
@@ -70,17 +76,13 @@ var mainState = {
 			this.playerDie();
 		}
 
-		//coin
 		game.physics.arcade.overlap(this.player, this.coin, this.takeCoin, null, this);
-
-		//enemies
 		game.physics.arcade.collide(this.enemies, this.walls);
 		game.physics.arcade.overlap(this.player, this.enemies, this.playerDie, null, this);
-
-		this.movePlayer();
-		if (!this.player.inWorld) {
-			this.playerDie();
-		}
+		game.physics.arcade.collide(this.enemies2, this.walls);
+		game.physics.arcade.overlap(this.player, this.enemies2, this.playerDie, null, this);
+	
+		
 	},
 
 	movePlayer: function(){
@@ -120,54 +122,45 @@ var mainState = {
 	},
 
 	takeCoin: function(player, coin){
-		this.coin.kill();
+		
 		this.score += 5;
 		this.scoreLabel.text = 'score: ' + this. score;
 		this.updateCoinPosition();
 	},
 
 //add enemy function
-	addEnemyFromTop: function() {
-		//get 1st dead enemy of group
-		var enemy = this.enemies.getFirstDead();
-		//do nothing if no enemy
-		if (!enemy) {
-			return;
+	addEnemy: function() {
+		var enemy = this.enemies.getFirstDead();//get the first dead enemy of the group
+		var enemy2 = this.enemies2.getFirstDead();
+		if (!enemy && !enemy2) {
+			return;//if there isn't any dead enemy do nothing
 		}
-
-		//initialize an enemy
-		//set anchor to  center bottom
 		enemy.anchor.setTo(0.5, 1);
 		enemy.reset(game.width/2, 0);
-		//add gravity
 		enemy.body.gravity.y = 500;
 		enemy.body.velocity.x = 100 * game.rnd.pick([-1, 1]);
-		
 		enemy.body.bounce.x = 1;
-		enemy.checkWorldBounds = true;
+		enemy.checkWorldBounds.x = 1;
 		enemy.outOfBoundsKill = true;
 	},
-
-	addEnemyFromBottom: function() {
-		var enemy = this.enemies.getFirstDead();
-
-		if (!enemy) {
-			return;
+	
+	addEnemy2: function() {
+		var enemy2 = this.enemies2.getFirstDead();//get the first dead enemy of the group
+		if (!enemy2) {
+			return;//if there isn't any dead enemy do nothing
 		}
-
-		//initialize an enemy
-		enemy.anchor.setTo(0.5, 1);
-		//add enemy from bottom
-		enemy.reset(game.width/2,0);
-		//add gravity 
-		enemy.body.gravity.y = -500;
-		enemy.body.velocity.x = 100 * game.rnd.pick([-1, 1]);
-		enemy.body.bounce.x = 1;
-		enemy.checkWorldBounds = true;
-		enemy.outOfBoundsKill = true;
+		
+		enemy2.anchor.setTo(0.5, 0);
+		enemy2.reset(game.width/2, game.height);
+		enemy2.body.gravity.y = -500;
+		enemy2.body.velocity.x = 100 * game.rnd.pick([-1, 1]);
+		enemy2.body.bounce.x = 1;
+		enemy2.checkWorldBounds.x = 1;
+		enemy2.outOfBoundsKill = true;
 	},
 };
 
-var game = new Phaser.Game(500,340, Phaser.AUTO, 'gameDiv');
-game.state.add('main', mainState);
+var game = new Phaser.Game(500, 340, Phaser.AUTO, "gameDiv");
+
+game.state.add('main', mainState); //name mainState as 'main'
 game.state.start('main');
