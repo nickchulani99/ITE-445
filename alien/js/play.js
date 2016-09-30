@@ -1,10 +1,11 @@
 var playState = {
 
 	create: function(){
-
+		 game.world.setBounds(1,1, 2000, 500);//-1000,-10000
+cursors = game.input.keyboard.createCursorKeys();
 
 		//player
-		this.player = game.add.sprite(game.width/2, game.height/2, 'player');
+		this.player = game.add.sprite(game.width/8, game.height/2, 'player');
 		this.player.anchor.setTo(0.5, 0.5);
 		game.physics.arcade.enable(this.player);
 		this.player.body.gravity.y = 500;
@@ -15,6 +16,29 @@ var playState = {
 		//walls
 		this.walls = game.add.group();
 		this.walls.enableBody = true;
+
+
+
+		//
+		//
+		//
+		//
+		//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		// game.add.sprite(0, 0, 'wallV', 0, this.walls);
 		// game.add.sprite(480, 0, 'wallV', 0, this.walls);
 
@@ -28,10 +52,55 @@ var playState = {
 
 		// var middleTop = game.add.sprite(100, 80, 'wallH', 0, this.walls);
 		// middleTop.scale.setTo(1.5, 1);
-		var middleBottom = game.add.sprite(10, 240, 'wallH', 0, this.walls);
-		middleBottom.scale.setTo(1.5, 1);
+		var middleBottom = game.add.sprite(10, 340, 'wallH', 0, this.walls);
+		middleBottom.scale.setTo(1, 1);
+		//2
+		var middletwo = game.add.sprite(10, 240, 'wallH', 0, this.walls);
+		middleBottom.scale.setTo(1, 1);
+		//3
+		var middlethree = game.add.sprite(50, 240, 'wallH', 0, this.walls);
+		middleBottom.scale.setTo(1, 1);
+		//4
+		var middlefour = game.add.sprite(250, 240, 'wallH', 0, this.walls);
+		middleBottom.scale.setTo(1, 1);
+		//5
+		var middlefive = game.add.sprite(400, 240, 'wallH', 0, this.walls);
+		middleBottom.scale.setTo(1, 1);
 
-		this.walls.setAll('body.immovable', true);
+		//6
+		var middlesix = game.add.sprite(650, 240, 'wallH', 0, this.walls);
+		middleBottom.scale.setTo(1, 1);
+		//7
+		var middleseven = game.add.sprite(750, 240, 'wallH', 0, this.walls);
+		middleBottom.scale.setTo(1, 1);
+		//8
+		var middleeight = game.add.sprite(1050, 240, 'wallH', 0, this.walls);
+		middleBottom.scale.setTo(1, 1);
+		//9
+		var middlenine = game.add.sprite(1350, 240, 'wallH', 0, this.walls);
+		middleBottom.scale.setTo(1, 1);
+		//10
+		var middleten = game.add.sprite(1750, 240, 'wallH', 0, this.walls);
+		middleBottom.scale.setTo(1, 1);
+		//11
+		var middleeleven = game.add.sprite(1950, 240, 'wallH', 0, this.walls);
+		middleBottom.scale.setTo(1, 1);
+		//12
+		var middletwelve = game.add.sprite(2250, 240, 'wallH', 0, this.walls);
+		middleBottom.scale.setTo(1, 1);
+		//13
+		var middlethirten = game.add.sprite(2550, 240, 'wallH', 0, this.walls);
+		middleBottom.scale.setTo(1, 1);
+		//14
+		var middlefourten = game.add.sprite(2850, 240, 'wallH', 0, this.walls);
+		middleBottom.scale.setTo(1, 1);
+		//15
+		var middlefiften = game.add.sprite(3050, 240, 'wallH', 0, this.walls);
+		middleBottom.scale.setTo(1, 1);
+
+
+
+		this.walls.setAll('body.movable', true);
 
 		//coin
 		this.coin = game.add.sprite(60, 140, 'coin');
@@ -74,6 +143,18 @@ var playState = {
 	},
 
 	update: function(){
+
+		
+
+    if (cursors.left.isDown)
+    {
+        game.camera.x -= 4;
+    }
+    else if (cursors.right.isDown)
+    {
+        game.camera.x += 4;
+    }
+
 		//player
 		game.physics.arcade.collide(this.player, this.walls);
 		this.movePlayer();
