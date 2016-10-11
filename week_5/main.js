@@ -12,13 +12,6 @@ var mainState = {
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		game.renderer.renderSession.roundRixels = true;
 
-		//display coin
-		this.coin = game.add.sprite(60,140,'coin');
-
-		//add  arcade physic to coin 
-		game.physics.arcade.enable(this.coin);
-		//set anchor 
-		this.coin.anchor.setTo(0.5,0.5);
 
 		//player
 		this.player = game.add.sprite(game.width/2, game.height/2, 'player');
@@ -30,6 +23,10 @@ var mainState = {
 
 		//control
 		this.cursor = game.input.keyboard.createCursorKeys();
+
+
+
+
 
 		//walls by grouping
 		this.walls = game.add.group();
@@ -58,6 +55,23 @@ var mainState = {
 		// set wall to immovable	
 		this.walls.setAll('body.immovable', true);
 
+
+
+
+
+		//display coin
+		this.coin = game.add.sprite(60,140,'coin');
+
+		//add  arcade physic to coin 
+		game.physics.arcade.enable(this.coin);
+		//set anchor 
+		this.coin.anchor.setTo(0.5,0.5);
+
+		
+
+		
+
+
 		//display score
 		this.scoreLabel = game.add.text(30,30,'Score: 0', {
 			font: '18px Arial',
@@ -70,14 +84,16 @@ var mainState = {
 	update: function() {
 		//add collision
 		game.physics.arcade.collide(this.player, this.walls);
-		game.physics.arcade.overlap(this.player, this.coin, this.takeCoin, null, this);
-
+		
 		this.movePlayer();
 
 		//check for respawn
 		if (!this.player.inWorld) {
 			this.playerDie();
 		}
+
+		game.physics.arcade.overlap(this.player, this.coin, this.takeCoin, null, this);
+
 	},
 
 	movePlayer: function() {
@@ -99,26 +115,32 @@ var mainState = {
 	playerDie: function(){
 		game.state.start('main');
 	},
-	updateCoinPosition:function(){
-		var coinPosition =[
-		{x:140, y:60}, {s:360, y:60} ,
-		{x:60, y:140}, {x:440, y:140},
-		{x:130, y:300},{x:370, y :300}
+	
+
+	updateCoinPosition: function(){
+		var coinPosition = [
+		{x: 140, y: 60}, {x: 360, y: 60},
+		{x: 60, y: 140}, {x: 440, y: 140},
+		{x: 130, y: 300}, {x: 370, y: 300},
 		];
-		for (var i=0; i<coinPosition.length; i++){
-			if(coinPosition[i].x==this.coin.x){
-				coinPosition.splice(i,1);
+
+		for (var i = 0; i < coinPosition.length; i++){
+			if(coinPosition[i].x ==this.coin.x) {
+				coinPosition.splice(i, 1);
 			}
 		}
 		var newPosition = game.rnd.pick(coinPosition);
-
 		this.coin.reset(newPosition.x, newPosition.y);
 	},
+
+
+
+
 
 	takeCoin: function(player, coin) {
 		// var number = game.rnd.integerInRange(a,b);
 		// this.coin.reset(x,y);
-		
+		this.coin.kill();
 		//increment score 
 		this.score += 5;
 		//update score 

@@ -29,6 +29,9 @@ var loadState={
 		game.load.audio('dead',['assets/dead.ogg','assets/dead.mp3']);
 		game.load.image('pixel','assets/pixel.png');
 		game.load.spritesheet('mute', 'assets/muteButton.png', 28, 22);
+		game.load.image('jumpButton', 'assets/jumpButton.png');
+      game.load.image('rightButton', 'assets/rightButton.png');
+      game.load.image('leftButton', 'assets/leftButton.png');
 	},
 	create:function(){
 		//go to menu state
