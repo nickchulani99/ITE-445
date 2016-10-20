@@ -1,0 +1,35 @@
+TASKS
+-----
+
+X more ledge objects
+X store ledge objects in a global array
+X move all ledge objects
+* move stars too
+
+X limit the mood variable
+X update position of all level objects based on some mulitplier of mood
+* only update position of objects "in front" of player
+X change sky background sprite based on mood
+* player jump length is modified by mood
+
+X start (menu) screen
+X 3 lives
+X lives display on hud
+* countdown timer, time has effect on mood?
+* end screen (fail vs. succeed)
+* player should die when hitting the bottom of the screen
+
+X dialog (phone calls) at top of screen
+* scripted times
+* randomly chosen text for phone call?
+
+* alter the character sprite to add mood indicators
+
+* invisible object at start of level as player start position
+X collision volume at end of level to detect end of level
+X multiple levels?
+
+X sounds for jump, collide, collect
+
+X better camera following of player
+X move HUD objects with camera

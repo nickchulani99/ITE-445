@@ -25,6 +25,8 @@ game.load.image('slime', 'assets/slime.png');
 
 game.load.image('back2', 'assets/back2.png');
 
+game.load.image('restart', 'assets/restart.png');
+
 
 
 
@@ -47,7 +49,7 @@ game.load.audio('win', [ 'assets/win.wav']);
 		game.load.audio('home',['assets/home.wav']);
 		game.load.image('pixel','assets/pixel.png');
 game.load.video('storyvideo', 'assets/video.webm');
-
+game.load.audio('alien', [ 'assets/alien.mp3']);
 
 
 
@@ -65,7 +67,10 @@ game.load.image('intro', 'assets/intro.png');
 
 
 
-
+game.load.spritesheet('mute', 'assets/muteButton.png', 28, 22);
+		game.load.image('jumpButton', 'assets/jumpButton.png');
+      game.load.image('rightButton', 'assets/rightButton.png');
+      game.load.image('leftButton', 'assets/leftButton.png');
 
 
 
